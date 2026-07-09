@@ -1,0 +1,48 @@
+import os
+import subprocess
+import shutil
+import time
+
+REPO_URL = "https://github.com/SharmaRajat10/devops-assignment.git"
+PROJECT_DIR = "project"
+
+# Function 1: Clone Repository
+def clone_repo():
+
+    if os.path.exists(PROJECT_DIR):
+        shutil.rmtree(PROJECT_DIR)
+        print("Old project deleted.")
+
+    subprocess.run(["git", "clone", REPO_URL, PROJECT_DIR], check=True)
+
+    print("Repository cloned successfully!")
+
+
+# Function 2: Detect HTML or PHP
+def detect_language():
+
+    app_path = os.path.join(PROJECT_DIR, "app")
+
+    if os.path.exists(os.path.join(app_path, "index.html")):
+        print("HTML application detected.")
+        return "html"
+
+    elif os.path.exists(os.path.join(app_path, "index.php")):
+        print("PHP application detected.")
+        return "php"
+
+    else:
+        print("No supported application found.")
+        return None
+
+
+# Main Function
+if __name__ == "__main__":
+
+    print("Starting Deployment...")
+
+    clone_repo()
+
+    language = detect_language()
+
+    print("Detected Language:", language)

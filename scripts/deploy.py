@@ -6,7 +6,7 @@ import time
 REPO_URL = "https://github.com/SharmaRajat10/devops-assignment.git"
 PROJECT_DIR = "project"
 
-# Function 1: Clone Repository
+# Function 1
 def clone_repo():
 
     if os.path.exists(PROJECT_DIR):
@@ -18,7 +18,7 @@ def clone_repo():
     print("Repository cloned successfully!")
 
 
-# Function 2: Detect HTML or PHP
+# Function 2
 def detect_language():
 
     app_path = os.path.join(PROJECT_DIR, "app")
@@ -36,6 +36,31 @@ def detect_language():
         return None
 
 
+# Function 3
+def create_dockerfile(language):
+
+    if language == "html":
+
+        dockerfile = """
+
+"""
+
+    elif language == "php":
+
+        dockerfile = """
+
+"""
+
+    else:
+        print("Unsupported application.")
+        return
+
+    with open("Dockerfile", "w") as file:
+        file.write(dockerfile)
+
+    print("Dockerfile created successfully!")
+
+
 # Main Function
 if __name__ == "__main__":
 
@@ -46,3 +71,6 @@ if __name__ == "__main__":
     language = detect_language()
 
     print("Detected Language:", language)
+
+    if language:
+        create_dockerfile(language)

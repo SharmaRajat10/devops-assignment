@@ -9,13 +9,25 @@ PROJECT_DIR = "project"
 # Function 1
 def clone_repo():
 
-    if os.path.exists(PROJECT_DIR):
-        shutil.rmtree(PROJECT_DIR)
-        print("Old project deleted.")
+    if not os.path.exists(PROJECT_DIR):
 
-    subprocess.run(["git", "clone", REPO_URL, PROJECT_DIR], check=True)
+        subprocess.run(
+            ["git", "clone", REPO_URL, PROJECT_DIR],
+            check=True
+        )
 
-    print("Repository cloned successfully!")
+        print("Repository cloned successfully!")
+
+    else:
+
+        subprocess.run(
+            ["git", "-C", PROJECT_DIR, "pull", "origin", "main"],
+            check=True
+        )
+
+        print("Repository updated successfully!")
+
+  
 
 
 # Function 2
